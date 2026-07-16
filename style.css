@@ -1,0 +1,38 @@
+.paymentWrap {
+    max-width: 800px;
+    margin: 20px auto; /* Centered the container horizontally */
+}
+
+.paymentWrap .paymentMethod {
+    padding: 30px;
+    box-shadow: none;
+    position: relative;
+}
+
+.paymentWrap .paymentMethod.active {
+    outline: none !important;
+}
+
+.paymentWrap .paymentMethod.active .method {
+    border-color: gray;
+    outline: none !important;
+    box-shadow: 0px 3px 22px 0px #7b7b7b;
+}
+
+.paymentWrap .paymentMethod .method {
+    position: absolute;
+    right: 3px;
+    top: 3px;
+    bottom: 3px;
+    left: 3px;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    border: 2px solid transparent;
+    transition: all 0.5s;
+}
+
+.paymentWrap .paymentMethod .method:hover {
+    border-color: gray;
+    outline: none !important;
+}
