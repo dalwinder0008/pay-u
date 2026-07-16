@@ -142,3 +142,109 @@ paymentForm.addEventListener('submit', async (e) => {
     }
 });
 
+
+
+
+
+
+
+
+
+
+
+
+script.js
+const paymentForm = document.getElementById('paymentForm');
+
+paymentForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const formData = {
+        amount: document.getElementById('amount').value,
+        firstName: document.getElementById('firstName').value,
+        lastName: document.getElementById('lastName').value,
+        email: document.getElementById('email').value
+    };
+
+    try {
+        const res = await fetch('http://localhost:3000/api/process-payment', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(formData)
+        });
+
+        const result = await res.json();
+
+        if (result.success && result.payuParams) {
+            const payuForm = document.createElement('form');
+            payuForm.action = result.payuUrl;
+            payuForm.method = 'POST';
+
+            for (const key in result.payuParams) {
+                if (result.payuParams.hasOwnProperty(key)) {
+                    const input = document.createElement('input');
+                    input.type = 'hidden';
+                    input.name = key;
+                    input.value = result.payuParams[key];
+                    payuForm.appendChild(input);
+                }
+            }
+
+            document.body.appendChild(payuForm);
+            payuForm.submit();
+        } else {
+            alert('Payment initialization failed.');
+        }
+        
+    } catch (err) {
+        console.error(err);
+        alert('SERVER NOT CONNECTED');
+    }
+});
+
+
+
+
+
+
+
+
+
+const express = require('express');
+const cors = require('cors');
+const { initiatePayUPayment } = require('./.api/payu');
+
+const app = express();
+app.use(cors());
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+app.post('/api/process-payment', (req, res) => {
+    const userData = req.body;
+    const payuData = initiatePayUPayment(userData);
+
+    console.log("Processing payment for:", userData.firstName);
+
+    res.json({
+        success: true,
+        ...payuData
+    });
+});
+
+app.post('/payment/success', (req, res) => {
+    console.log("Payment Successful!");
+    res.send("<h1>Payment Successful!</h1>");
+});
+
+app.post('/payment/failure', (req, res) => {
+    console.log("Payment Failed!");
+    res.send("<h1>Payment Failed!</h1>");
+});
+
+app.listen(3000, () => {
+    console.log('Server running on port 3000');
+});
+
+
+
+
