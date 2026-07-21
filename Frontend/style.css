@@ -11,8 +11,6 @@ body {
 }
 
 
-
-/* Card layout container */
 .checkout-container {
     background-color: #ffffff;
     width: 100%;
@@ -22,7 +20,6 @@ body {
     overflow: hidden;
 }
 
-/* Top header styling */
 .checkout-header {
     background-color: #fafafa;
     padding: 25px;
@@ -43,24 +40,19 @@ body {
     font-size: 14px;
 }
 
-/* Inside form padding */
 form {
     padding: 30px;
 }
-
-/* Row wrapper for side-by-side inputs (Name fields) */
 .form-row {
     display: flex;
     gap: 15px;
 }
 
-/* Individual input group container */
 .form-group {
     margin-bottom: 20px;
-    flex: 1; /* Space barabar baantne ke liye */
+    flex: 1; 
 }
 
-/* Labels layout */
 label {
     display: block;
     margin-bottom: 8px;
@@ -69,7 +61,6 @@ label {
     font-size: 14px;
 }
 
-/* Modern Input boxes */
 input {
     width: 100%;
     padding: 12px;
@@ -80,14 +71,12 @@ input {
     transition: all 0.2s ease;
 }
 
-/* Input click/focus effect */
 input:focus {
     border-color: #007bff;
     outline: none;
     box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
 }
 
-/* Sleek modern button */
 .submit-btn {
     width: 100%;
     padding: 14px;
@@ -102,7 +91,6 @@ input:focus {
     transition: background-color 0.2s, transform 0.1s;
 }
 
-/* Hover & click action for button */
 .submit-btn:hover {
     background-color: #0056b3;
 }
@@ -110,5 +98,3 @@ input:focus {
 .submit-btn:active {
     transform: scale(0.99);
 }
-
-
